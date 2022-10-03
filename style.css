@@ -1,0 +1,15 @@
+.navList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+.navListItem {
+    float: left;
+}
+
+.navListItemText {
+    padding: 5px;
+    text-decoration:none; 
+    color:black;
+}
