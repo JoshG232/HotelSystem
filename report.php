@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <?php include 'headerNav.html';?>
     <?php include 'header.html';?>
     <h1>Report page</h1>
 </body>

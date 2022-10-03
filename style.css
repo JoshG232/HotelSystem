@@ -1,10 +1,23 @@
 .navList {
+    position: relative;
     list-style-type: none;
     margin: 0;
     padding: 0;
-  }
-
+    display: block;
+    float: left;
+}
+.navList2 {
+    position: relative;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    float: right;
+}
 .navListItem {
+    float: left;
+}
+.navListItem2 {
     float: left;
 }
 
@@ -12,4 +25,40 @@
     padding: 5px;
     text-decoration:none; 
     color:black;
+}
+
+.header{
+    
+    
+    text-align: center;
+    color: white;
+    height: 300px;
+}
+.headerImage{
+    
+    max-width: 100%;
+    max-height: 600px;
+}
+
+.titleWords {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+
+}
+input{
+    display:block;
+}
+.registerForm {
+    position: relative;
+    bottom: 10%;
+}
+.loginForm{
+    position: relative;
+}
+
+.footerText{
+    text-align: center;
+    
 }

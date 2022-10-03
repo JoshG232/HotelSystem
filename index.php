@@ -9,9 +9,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body onLoad="showSlides(1)">
-    <?php include 'header.html';?>
-
-    <script src="app.js"></script>
+    <header>
+      <?php include 'headerNav.html';?>
+      <?php include 'header.html';?>
+    </header>
+    
+    
+    
     <h1>Slide show of images</h1>
     <div class="slideshow-container">
 
@@ -44,8 +48,10 @@
         <a class="random" onclick="randomSlide()">Random</a>
         </div>
         
-        <br>
-        
+        <br> -->
+        <footer>
+          <?php include 'footer.html' ?>
+        </footer>
         
         
 
