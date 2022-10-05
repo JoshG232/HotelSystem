@@ -30,3 +30,8 @@ function randomSlide(){
     n = Math.floor(Math.random() * 4) + 1;
     currentSlide(n);
 }
+
+function locationSelection(){
+  tmp = document.getElementById("hotelList");
+  console.log(tmp)
+}

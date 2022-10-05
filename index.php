@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +10,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body onLoad="showSlides(1)">
+
+
     <header>
-      <?php include 'headerNav.html';?>
+      <?php include 'headerNav.php';?>
       <?php include 'header.html';?>
     </header>
     
@@ -48,7 +51,10 @@
         <a class="random" onclick="randomSlide()">Random</a>
         </div>
         
-        <br> -->
+        <br>
+        
+
+
         <footer>
           <?php include 'footer.html' ?>
         </footer>

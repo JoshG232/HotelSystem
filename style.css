@@ -1,8 +1,8 @@
 .navList {
-    position: relative;
+    position: fixed;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding-right: 500px;
     display: block;
     float: left;
 }
@@ -61,4 +61,22 @@ input{
 .footerText{
     text-align: center;
     
+}
+.roomDisplay {
+    position: static;
+    display: block;
+    position: absolute;
+    top: 20%;
+    clear: both;
+
+}
+
+form.selectForm {
+  position: relative;
+  padding-top: 50px;
+  
+}
+
+form.input.hiddenVariables{
+    display: none;
 }

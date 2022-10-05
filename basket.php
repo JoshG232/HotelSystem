@@ -9,6 +9,6 @@
 </head>
 <body>
     <?php include 'headerNav.html';?>
-    <!-- <?php include 'header.html';?> -->
+    <!-- <?php include 'header.php';?> -->
 </body>
 </html>
