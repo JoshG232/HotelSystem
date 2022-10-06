@@ -26,18 +26,22 @@
         echo $_POST['roomID'];
         $hotelID = $_POST['hotelID'];
         $roomID = $_POST['roomID'];
-        // $customerID = $_SESSION[];
+        $customerID = $_SESSION['customerID'];
+        $dateBooked = date("Y-m-d");
+        $checkIn = "11AM";
+        $checkOut = "10AM";
+        
 
 
-    //     $sql = "INSERT INTO booking(hotelID,roomID,customerID,dateBooked,booked,checkIn,checkOut)
-    //     VALUES ('$hotelID,'$roomID','$customerID','$dateBooked','$booked','$checkIn','$checkOut')";
-    //     if (mysqli_query($conn, $sql)){
+        $sql = "INSERT INTO booking(hotelID,roomID,customerID,dateBooked,checkIn,checkOut)
+        VALUES ('$hotelID,'$roomID','$customerID','$dateBooked','$checkIn','$checkOut')";
+        if (mysqli_query($conn, $sql)){
             
-    //         echo "All Booked";
-    //     }
-    //       else {
-    //         echo "Error" . mysqli_error($conn);
-    //     }
+            echo "All Booked";
+        }
+          else {
+            echo "Error" . mysqli_error($conn);
+        }
     }
 ?>
 
@@ -90,10 +94,4 @@
 <?php endforeach ?>
 
 
-hotelID
-$roomID
-customerID
-dateBooked
-booked
-checkIn
-checkOut
+
