@@ -8,7 +8,7 @@
     </ul>
     <ul class="navList2">
         <li class="navListItem2"><a href="basket.php" class="navListItemText">Basket</a></li>
-        <li class="navListItem2"><a href="" class="navListItemText">Account</a></li>
+        <li class="navListItem2"><a href="account.php" class="navListItemText">Account</a></li>
         <!-- Once logged in need to change from "login/register" to "Account"  -->
     </ul>
 

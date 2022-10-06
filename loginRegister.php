@@ -47,9 +47,13 @@
             $loginInfo = mysqli_fetch_all($result, MYSQLI_ASSOC);
             $actPassword = $loginInfo[0]["password"];
             $firstName = $loginInfo[0]["firstName"];
-            var_export($actPassword);
+            $customerID = $loginInfo[0]["customerID"];
+            
+            // var_export($actPassword);
             if ($password == "$actPassword"){
                 $_SESSION["firstName"] = $firstName;
+                $_SESSION["customerID"] = $customerID;
+                
                 header("Location: index.php");
             } else {
                 echo "Incorrect login";
@@ -106,7 +110,9 @@
     </div>
 
     
-
+    <footer>
+        <?php include 'footer.html' ?>
+    </footer>
 
 
 

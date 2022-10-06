@@ -18,23 +18,20 @@
 
     if (isset($_POST["submitBooking"])){
         
-        // $hotelID = filter_input(INPUT_POST, "hotelID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        echo $_POST['adults'];
-        
-        echo $_POST['children'];
-        echo $_POST['hotelID'];
-        echo $_POST['roomID'];
-        $hotelID = $_POST['hotelID'];
-        $roomID = $_POST['roomID'];
+        $hotelID = filter_input(INPUT_POST, "hotelID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $roomID = filter_input(INPUT_POST, "roomID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $customerID = $_SESSION['customerID'];
         $dateBooked = date("Y-m-d");
-        $checkIn = "11AM";
+        $adults = filter_input(INPUT_POST, "adults",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $children = filter_input(INPUT_POST, "children",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $booked = "0";
+        $checkIn = "11AM" ;
         $checkOut = "10AM";
         
 
-
-        $sql = "INSERT INTO booking(hotelID,roomID,customerID,dateBooked,checkIn,checkOut)
-        VALUES ('$hotelID,'$roomID','$customerID','$dateBooked','$checkIn','$checkOut')";
+        
+        $sql = "INSERT INTO booking(hotelID,roomID,customerID,adults,children,dateBooked,booked,checkIn,checkOut)
+        VALUES ('$hotelID','$roomID','$customerID','$adults','$children','$dateBooked','$booked','$checkIn','$checkOut')";
         if (mysqli_query($conn, $sql)){
             
             echo "All Booked";
@@ -95,3 +92,6 @@
 
 
 
+<footer>
+    <?php include 'footer.html' ?>
+</footer>
