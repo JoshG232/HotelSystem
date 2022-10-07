@@ -10,11 +10,17 @@
     
     if(isset($_POST['submitHotelList'])){
         $selectedHotel = $_POST['hotelList'];
-    } 
-    $sql = "SELECT * FROM room WHERE hotelID='$selectedHotel'";
-    $result = mysqli_query($conn,$sql);
-    $roomToBook = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $sql = "SELECT * FROM room WHERE hotelID='$selectedHotel'";
+        $result = mysqli_query($conn,$sql);
+        $roomToBook = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+    } 
+    else{
+        $sql = "SELECT * FROM room";
+        $result = mysqli_query($conn,$sql);
+        $roomToBook = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+    
 
     if (isset($_POST["submitBooking"])){
         
