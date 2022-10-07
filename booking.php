@@ -1,9 +1,13 @@
 <?php include "./config/database.php"; ?>
 <?php include 'headerNav.php';?>
 <script src="./app.js"></script>
-<link rel="stylesheet" href="style.css">
+
 <style>
     input.hiddenVariables{display:none;}
+    form.input{
+        top: 10%;
+    
+    }
 </style>
 <body onload="locationSelection()"></body>
 <?php 

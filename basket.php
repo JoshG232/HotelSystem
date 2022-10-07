@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Website</title>
-    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
     <?php include 'headerNav.php';?>
@@ -31,6 +31,19 @@
             $bookingID = filter_input(INPUT_POST, "bookingID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             echo $bookingID;
             $sql = "UPDATE booking SET booked='1' WHERE bookingID='$bookingID'";
+            if (mysqli_query($conn, $sql)){
+            
+                header("Location: index.php");
+            }
+              else {
+                echo "Error" . mysqli_error($conn);
+            }
+            
+        }
+        if (isset($_POST["deleteBooking"])){
+            $bookingID = filter_input(INPUT_POST, "bookingID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            echo $bookingID;
+            $sql = "DELETE FROM `booking` WHERE bookingID='$bookingID'";
             if (mysqli_query($conn, $sql)){
             
                 echo "All confirmed";
@@ -70,6 +83,11 @@
             <input type="text" name="bookingID"  value=<?php echo $booking["bookingID"] ?> class="hiddenVariables">
             <input type="submit" value="Confirm booking" name="confirmBooking">
         </form>
+        <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+            <input type="text" name="bookingID"  value=<?php echo $booking["bookingID"] ?> class="hiddenVariables">
+            <input type="submit" value="Delete booking" name="deleteBooking">
+        </form>
+
         
         <br>
     </div>

@@ -1,7 +1,18 @@
 <?php include 'headerNav.php';?>
 <?php include "./config/database.php"; ?>
 <link rel="stylesheet" href="style.css">
+<style>
+    div.basketDisplay{
+        display: block;
+    }
+    input.hiddenVariables{
+        display:none;
+    }
+
+
+</style>
 <body>
+
 <?php 
     $customerID = $_SESSION['customerID'];
     $sql = "SELECT * FROM customer WHERE customerID='$customerID'";
@@ -12,6 +23,7 @@
     $sql = "SELECT * FROM booking WHERE customerID='$customerID' AND booked='1'";
     $result = mysqli_query($conn,$sql);
     $bookings = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 
     if (isset($_POST["updateInfo"])){
         $customerID = $_SESSION["customerID"];
@@ -33,6 +45,20 @@
              WHERE customerID='$customerID'";
         if (mysqli_query($conn, $sql)){
             
+            header("Location: account.php");
+        }
+          else {
+            echo "Error" . mysqli_error($conn);
+        }
+        
+    }
+
+    if (isset($_POST["deleteBooking"])){
+        $bookingID = filter_input(INPUT_POST, "bookingID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        echo $bookingID;
+        $sql = "DELETE FROM `booking` WHERE bookingID='$bookingID'";
+        if (mysqli_query($conn, $sql)){
+        
             header("Location: account.php");
         }
           else {
@@ -96,7 +122,7 @@
 
     ?>
     <h2>Bookings</h2>
-    <div class="basketDisplay">
+    <div class="accountDisplay">
         <p>Hotel: <?php echo $hotelName ?> </p>
         <P>Date booked for: <?php echo $booking["dateBooked"] ?> </p>
         <p>Booking ID: <?php echo $booking["bookingID"] ?> </p>
@@ -104,7 +130,10 @@
         <p>Check out time:<?php echo $booking["checkOut"] ?> </p>
         <p>Adults:<?php echo $booking["adults"] ?> </p>
         <p>Children:<?php echo $booking["children"] ?> </p>
-        
+        <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+            <input type="text" name="bookingID"  value=<?php echo $booking["bookingID"] ?> class="hiddenVariables">
+            <input type="submit" value="Delete booking" name="deleteBooking">
+        </form>
         
         <br>
     </div>

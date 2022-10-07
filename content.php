@@ -1,6 +1,6 @@
 <?php include 'headerNav.php';?>
 <?php include "./config/database.php"; ?>
-<link rel="stylesheet" href="style.css">
+
 
 <body>
     <?php

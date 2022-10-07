@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Website</title>
     <script src="./app.js"></script>
-    <link rel="stylesheet" href="style.css">
+
 </head>
 <body onLoad="showSlides(1)">
 
 
     <header>
       <?php include 'headerNav.php';?>
-      <?php include 'header.html';?>
+      <!-- <?php include 'header.html';?> -->
     </header>
     
     
