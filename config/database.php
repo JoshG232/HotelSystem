@@ -1,6 +1,6 @@
 <?php
 define("DB_HOST", "localhost");
-define("DB_USER", "joshAdmin");
+define("DB_USER", "josh");
 define("DB_PASS", "123");
 define("DB_NAME", "hoteldatabase");
 

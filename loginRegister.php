@@ -19,7 +19,6 @@
     <?php
         // $firstName = $lastName = $email = $gender = $age = $nationality = "";
         if (isset($_POST["submitRegister"])){
-            
             $firstName = filter_input(INPUT_POST, "firstName",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $lastName = filter_input(INPUT_POST, "lastName",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, "email",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -27,15 +26,23 @@
             $gender = filter_input(INPUT_POST, "gender",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $age = filter_input(INPUT_POST, "age",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $nationality = filter_input(INPUT_POST, "nationality",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $sql = "INSERT INTO customer(firstName,lastName,email,password,gender,age,nationality)
-            VALUES ('$firstName','$lastName','$email','$password','$gender','$age','$nationality')";
-            if (mysqli_query($conn, $sql)){
-                
-                header("Location: index.php");
-              }
-              else {
-                echo "Error" . mysqli_error($conn);
+
+            $sql= "SELECT email FROM customer WHERE email='$email'";
+            $result = mysqli_query($conn,$sql);
+            if (mysqli_num_rows($result)==0) {
+                $sql = "INSERT INTO customer(firstName,lastName,email,password,gender,age,nationality)
+                VALUES ('$firstName','$lastName','$email','$password','$gender','$age','$nationality')";
+                if (mysqli_query($conn, $sql)){
+                    
+                    header("Location: index.php");
+                }
+                else {
+                    echo "Error" . mysqli_error($conn);
+                }
+            } else {
+                echo "Email already in use. Please login or use another email.";
             }
+            
         }
         if (isset($_POST["submitLogin"])){
             

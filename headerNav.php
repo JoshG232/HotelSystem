@@ -1,5 +1,6 @@
 <?php
     $loggedIn = "none";
+    $adminRights = "none";
     $firstName = "";
     $bookings = "1"
 ?>
@@ -8,15 +9,23 @@
     .navListItem2 {
         display: <?php echo "$loggedIn" ?>;
     }
+    .navListItem4 {
+        display: <?php echo "$adminRights" ?>;
+    }
 </style>
 
 <?php
     session_start();
 
     if (isset($_SESSION["firstName"])){
+
         $firstName = $_SESSION["firstName"];
+        $customerID = $_SESSION["customerID"];
         $loggedIn = "unset";
         $loggedIn2 = "none";
+        if ($customerID == "22"){
+            $adminRights = "unset";
+        }
         
         
     } else {
@@ -48,11 +57,13 @@
             <a href="content.php" class="navListItem">Content</a>
             <div class="rightNav">
                 <a href="" class="navListItem2"><?php echo "Welcome ". $firstName; ?> </a>
+
+                <a href="adminPage.php" class="navListItem4">Admin Page</a>
                 <a href="booking.php" class="navListItem2">Booking</a>
                 <a href="basket.php" class="navListItem2">Basket</a>
                 <a href="account.php" class="navListItem2">Account</a>
                 <a href="logout.php" class="navListItem2">Logout</a>
-                <a href="loginReister.php" class="navListItem3">Login/Register</a>
+                <a href="loginRegister.php" class="navListItem3">Login/Register</a>
             </div>
         </div>
     <!-- </div> -->
@@ -64,5 +75,8 @@
     }
     .navListItem3 {
         display: <?php echo "$loggedIn2" ?>;
+    }
+    .navListItem4 {
+        display: <?php echo "$adminRights" ?>;
     }
 </style>
