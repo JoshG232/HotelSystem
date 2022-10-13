@@ -31,7 +31,7 @@
         $hotelID = filter_input(INPUT_POST, "hotelID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $roomID = filter_input(INPUT_POST, "roomID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $customerID = $_SESSION['customerID'];
-        $dateBooked = date("Y-m-d");
+        $dateBooked = filter_input(INPUT_POST, "dateBooked",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $adults = filter_input(INPUT_POST, "adults",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $children = filter_input(INPUT_POST, "children",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $booked = "0";
@@ -85,7 +85,10 @@
             <label for="adults">Number of Adults</label>
             <input type="number" name="adults" min="0" max="2"> 
             <label for="children">Number of children</label>
-            <input type="number" name="children" min="0" max="2"> 
+            <input type="number" name="children" min="0" max="2">
+            <label for="dateBooked">Select a date to book:</label>
+            <input type="date" name="dateBooked" >
+
             <input type="text" name="hotelID" value=<?php echo $room["hotelID"] ?> class="hiddenVariables">
             <input type="text" name="roomID" value=<?php echo $room["roomID"] ?> class="hiddenVariables">
             

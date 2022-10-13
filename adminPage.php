@@ -130,9 +130,11 @@
         }
         if (isset($_POST["deleteCustomer"])){
             $customerID = filter_input(INPUT_POST, "customerID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $sql = "DELETE FROM 'customer' WHERE customerID='$customerID'";
+            
+            $sql = "DELETE FROM `customer` WHERE customerID='$customerID'";
+            
             if (mysqli_query($conn, $sql)){
-                echo "All confirmed";
+                header("Location: adminPage.php");
             }
               else {
                 echo "Error" . mysqli_error($conn);
@@ -167,14 +169,161 @@
             
         }
 
+
+
+
+        //Display bookings
+        $sql = "SELECT * FROM booking";
+        $result = mysqli_query($conn,$sql);
+        $bookings = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        //Add, delete and update bookings
+        if (isset($_POST["updateBookingInfo"])){
+            
+            $bookingID = filter_input(INPUT_POST, "bookingID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $hotelID = filter_input(INPUT_POST, "hotelID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $roomID = filter_input(INPUT_POST, "roomID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $customerID = filter_input(INPUT_POST, "customerID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $adults = filter_input(INPUT_POST, "adults",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $children = filter_input(INPUT_POST, "children",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateBooked = filter_input(INPUT_POST, "dateBooked",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $booked = filter_input(INPUT_POST, "booked",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $checkIn = filter_input(INPUT_POST, "checkIn",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $checkOut = filter_input(INPUT_POST, "checkOut",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $sql = "UPDATE booking SET  
+                hotelID='$hotelID', 
+                roomID='$roomID',
+                customerID='$customerID', 
+                adults='$adults',
+                children='$children',
+                dateBooked='$dateBooked',
+                booked='$booked',
+                checkIn='$checkIn',
+                checkOut='$checkOut'
+                 WHERE bookingID='$bookingID'";
+            
+            if (mysqli_query($conn, $sql)){
+                
+                header("Location: adminPage.php");
+            }
+              else {
+                echo "Error" . mysqli_error($conn);
+            }
+            
+        }
+        if (isset($_POST["deleteBooking"])){
+            $bookingID = filter_input(INPUT_POST, "bookingID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            $sql = "DELETE FROM `booking` WHERE bookingID='$bookingID'";
+            if (mysqli_query($conn, $sql)){
+                header("Location: adminPage.php");
+                
+            }
+              else {
+                echo "Error" . mysqli_error($conn);
+            }
+            
+        }
+
+        if (isset($_POST["addBookingInfo"])){
+            
+            $hotelID = filter_input(INPUT_POST, "hotelID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $roomID = filter_input(INPUT_POST, "roomID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $customerID = filter_input(INPUT_POST, "customerID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $adults = filter_input(INPUT_POST, "adults",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $children = filter_input(INPUT_POST, "children",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateBooked = filter_input(INPUT_POST, "dateBooked",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $booked = filter_input(INPUT_POST, "booked",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $checkIn = filter_input(INPUT_POST, "checkIn",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $checkOut = filter_input(INPUT_POST, "checkOut",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $sql= "SELECT roomID,dateBooked FROM booking WHERE roomID='$roomID' AND dateBooked='$dateBooked'";
+            $result = mysqli_query($conn,$sql);
+            if (mysqli_num_rows($result)==0) {
+                $sql = "INSERT INTO booking(hotelID,roomID,customerID,adults,children,dateBooked,booked,checkIn,checkOut)
+                VALUES ('$hotelID','$roomID','$customerID','$adults','$children','$dateBooked','$booked','$checkIn','$checkOut')";
+                if (mysqli_query($conn, $sql)){
+                    
+                    header("Location: adminPage.php");
+                }
+                else {
+                    echo "Error" . mysqli_error($conn);
+                }
+            } else {
+                echo "Booking already in that hotel";
+            }
+            
+        }
+
+
+
+
+        //Display hotels
+        $sql = "SELECT * FROM hotel";
+        $result = mysqli_query($conn,$sql);
+        $hotels = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        //Add, delete and update bookings
+        if (isset($_POST["updateHotelInfo"])){
+            
+            $hotelID = filter_input(INPUT_POST, "hotelID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $location = filter_input(INPUT_POST, "location",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $numberOfRooms = filter_input(INPUT_POST, "numberOfRooms",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $uniqueFeature = filter_input(INPUT_POST, "uniqueFeature",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            $sql = "UPDATE hotel SET  
+                location='$location', 
+                numberOfRooms='$numberOfRooms',
+                uniqueFeature='$uniqueFeature'
+                
+                 WHERE hotelID='$hotelID'";
+            
+            if (mysqli_query($conn, $sql)){
+                
+                header("Location: adminPage.php");
+            }
+              else {
+                echo "Error" . mysqli_error($conn);
+            }
+            
+        }
+        if (isset($_POST["deleteHotel"])){
+            $hotelID = filter_input(INPUT_POST, "hotelID",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            $sql = "DELETE FROM `hotel` WHERE hotelID='$hotelID'";
+            if (mysqli_query($conn, $sql)){
+                header("Location: adminPage.php");
+                
+            }
+              else {
+                echo "Error" . mysqli_error($conn);
+            }
+            
+        }
+
+        if (isset($_POST["addHotelInfo"])){
+            
+            $location = filter_input(INPUT_POST, "location",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $numberOfRooms = filter_input(INPUT_POST, "numberOfRooms",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $uniqueFeature = filter_input(INPUT_POST, "uniqueFeature",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            $sql = "INSERT INTO hotel(location,numberOfRooms,uniqueFeature)
+            VALUES ('$location','$numberOfRooms','$uniqueFeature')";
+            if (mysqli_query($conn, $sql)){
+                
+                header("Location: adminPage.php");
+            }
+            else {
+                echo "Error" . mysqli_error($conn);
+            }
+            
+            
+        }
+
     ?>
 
 
 <h1>Room details</h1>
 
-<?php
 
-?>
 
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                 
@@ -244,6 +393,9 @@
 
 <?php endforeach ?>
 
+
+
+<h1>Customer details</h1>
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                 
                 <label for="firstName">First name:</label>
@@ -256,7 +408,8 @@
                 <input type="text" name="email" >
 
                 <label for="password">Password:</label>
-                <input type="text" name="password"  >
+                <input type="password" name="password"  >
+                <button onclick="showPassword()"></button>
 
                 <label for="gender">Gender:</label>
                 <input type="text" name="gender"  >
@@ -278,32 +431,164 @@
             <label for="customerID">CustomerID: <?php echo $customer["customerID"]?></label>
             <input type="text" name="customerID" value=<?php echo $customer["customerID"]?> class="hiddenVariables">
 
-            <label for="hotelID">HotelID:</label>
-            <input type="text" name="hotelID" value=<?php echo $room["hotelID"]?> >
+            <label for="firstName">First Name:</label>
+            <input type="text" name="firstName" value=<?php echo $customer["firstName"]?> >
 
-            <label for="cost">Cost:</label>
-            <input type="text" name="cost" value=<?php echo $room["cost"]?> >
+            <label for="lastName">Last Name:</label>
+            <input type="text" name="lastName" value=<?php echo $customer["lastName"]?> >
 
-            <label for="beds">Beds:</label>
-            <input type="text" name="beds" value=<?php echo $room["beds"]?> >
+            <label for="email">Email:</label>
+            <input type="text" name="email" value=<?php echo $customer["email"]?> >
 
-            <label for="roomNumber">Room Number:</label>
-            <input type="text" name="roomNumber" value=<?php echo $room["roomNumber"]?> >
+            <label for="password">Password:</label>
+            <input type="password" name="password" value=<?php echo $customer["password"]?> >
 
-            <label for="maxAdults">Max Adults:</label>
-            <input type="text" name="maxAdults" value=<?php echo $room["maxAdults"]?> >
+            <label for="gender">Gender:</label>
+            <input type="text" name="gender" value=<?php echo $customer["gender"]?> >
 
-            <label for="nationality">Max Children:</label>
-            <input type="text" name="maxChildren" value=<?php echo $room["maxChildren"]?> >
+            <label for="age">Age:</label>
+            <input type="text" name="age" value=<?php echo $customer["age"]?> >
 
-            <label for="bathroomDetails">Bathroom Details:</label>
-            <input type="text" name="bathroomDetails" value=<?php echo $room["bathroomDetails"]?> >
+            <label for="nationality">Nationality:</label>
+            <input type="text" name="nationality" value=<?php echo $customer["nationality"]?> >
 
-            <input type="submit" value="Update information" name="updateRoomInfo">
+            <input type="submit" value="Update information" name="updateCustomerInfo">
         </form>
         <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
-            <input type="text" name="roomID"  value=<?php echo $room["roomID"] ?> class="hiddenVariables">
-            <input type="submit" value="Delete room" name="deleteRoom">
+            <input type="text" name="customerID"  value=<?php echo $customer["customerID"] ?> class="hiddenVariables">
+            <input type="submit" value="Delete customer" name="deleteCustomer">
+        </form>
+        <br>
+        
+    </div>
+
+
+<?php endforeach ?>
+
+<h1>Booking details</h1>
+
+<?php
+
+?>
+
+    <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                
+                <label for="hotelID">HotelID:</label>
+                <input type="text" name="hotelID" >
+
+                <label for="roomID">RoomID:</label>
+                <input type="text" name="roomID"  >
+
+                <label for="customerID">CustomerID:</label>
+                <input type="text" name="customerID" >
+
+                <label for="adults">Adults:</label>
+                <input type="text" name="adults"  >
+
+                <label for="children">Children:</label>
+                <input type="text" name="children"  >
+
+                <label for="dateBooked">Date Booked:</label>
+                <input type="date" name="dateBooked"  >
+
+                <label for="booked">Booked:</label>
+                <input type="text" name="booked"  >
+
+                <label for="checkIn">CheckIn:</label>
+                <input type="text" name="checkIn"  >
+
+                <label for="checkOut">CheckOut:</label>
+                <input type="text" name="checkOut"  >
+
+                <input type="submit" value="Add booking" name="addBookingInfo">
+    </form>
+<?php foreach($bookings as $booking): ?>
+
+    <div class="roomDisplay">
+        
+        <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+            
+            <label for="bookingID">BookingID: <?php echo $booking["bookingID"]?></label>
+            <input type="text" name="bookingID" value=<?php echo $booking["bookingID"]?> class="hiddenVariables">
+
+            <label for="hotelID">HotelID:</label>
+            <input type="text" name="hotelID" value=<?php echo $booking["hotelID"]?> >
+
+            <label for="roomID">RoomID:</label>
+            <input type="text" name="roomID" value=<?php echo $booking["roomID"]?> >
+
+            <label for="customerID">CustomerID:</label>
+            <input type="text" name="customerID" value=<?php echo $booking["customerID"]?> >
+
+            <label for="adults">Adults:</label>
+            <input type="text" name="adults" value=<?php echo $booking["adults"]?> >
+
+            <label for="children">Children:</label>
+            <input type="text" name="children" value=<?php echo $booking["children"]?> >
+
+            <label for="dateBooked">Date booked:</label>
+            <input type="date" name="dateBooked" value=<?php echo $booking["dateBooked"]?> >
+
+            <label for="booked">Booked:</label>
+            <input type="text" name="booked" value=<?php echo $booking["booked"]?> >
+
+            <label for="checkIn">Check in time:</label>
+            <input type="text" name="checkIn" value=<?php echo $booking["checkIn"]?> >
+
+            <label for="checkOut">Check out time:</label>
+            <input type="text" name="checkOut" value=<?php echo $booking["checkOut"]?> >
+
+            <input type="submit" value="Update information" name="updateBookingInfo">
+        </form>
+        <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+            <input type="text" name="bookingID"  value=<?php echo $booking["bookingID"] ?> class="hiddenVariables">
+            <input type="submit" value="Delete booking" name="deleteBooking">
+        </form>
+        <br>
+        
+    </div>
+
+
+<?php endforeach ?>
+
+<h1>Hotel details</h1>
+
+    <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                
+                <label for="location">Location:</label>
+                <input type="text" name="location" >
+
+                <label for="numberOfRooms">Number of rooms:</label>
+                <input type="text" name="numberOfRooms"  >
+
+                <label for="uniqueFeature">Unique Feature:</label>
+                <input type="text" name="uniqueFeature" >
+
+                <input type="submit" value="Add hotel" name="addHotelInfo">
+    </form>
+<?php foreach($hotels as $hotel): ?>
+
+    <div class="roomDisplay">
+        
+        <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+            
+            <label for="hotelID">HotelID: <?php echo $hotel["hotelID"]?></label>
+            <input type="text" name="hotelID" value=<?php echo $hotel["hotelID"]?> class="hiddenVariables">
+
+            <label for="location">Location:</label>
+            <input type="text" name="location" value=<?php echo $hotel["location"]?> >
+
+            <label for="numberOfRooms">Number of rooms:</label>
+            <input type="text" name="numberOfRooms" value=<?php echo $hotel["numberOfRooms"]?> >
+
+            <label for="uniqueFeature">Unique Feature:</label>
+            <input type="text" name="uniqueFeature" value=<?php echo $hotel["uniqueFeature"]?> >
+
+            <input type="submit" value="Update information" name="updateHotelInfo">
+        </form>
+        <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+            <input type="text" name="hotelID"  value=<?php echo $hotel["hotelID"] ?> class="hiddenVariables">
+            <input type="submit" value="Delete hotel" name="deleteHotel">
         </form>
         <br>
         

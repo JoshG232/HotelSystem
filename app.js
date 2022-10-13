@@ -35,3 +35,7 @@ function locationSelection(){
   tmp = document.getElementById("hotelList");
   console.log(tmp)
 }
+
+function showPassword(){
+  
+}
