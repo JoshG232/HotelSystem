@@ -9,7 +9,7 @@
     <script src="./app.js"></script>
 
 </head>
-<body onLoad="showSlides(1)">
+<body onLoad="slideShow(0)">
 
 
     <header>
@@ -20,34 +20,24 @@
     
     
     <h1>Slide show of images</h1>
-    <div class="slideshow-container">
 
-        <div class="mySlides fade">
-          <div class="numbertext">1 / 4</div>
-          <img src="./Images/img1.jpg" style="width:100%">
-          <div class="text">Caption Text</div>
-        </div>
-        
-        <div class="mySlides fade">
-          <div class="numbertext">2 / 4</div>
-          <img src="./Images/img2.jpg" style="width:100%">
-          <div class="text">Caption Two</div>
-        </div>
-        
-        <div class="mySlides fade">
-          <div class="numbertext">3 / 4</div>
-          <img src="./Images/img3.jpg" style="width:100%">
-          <div class="text">Caption Three</div>
-        </div>
-        
-        <div class="mySlides fade">
-            <div class="numbertext">4 / 4</div>
-            <img src="./Images/img4.jpg" style="width:100%">
-            <div class="text">Caption Four</div>
-          </div>
-        
-        <a class="prev" onclick="plusSlides(-1)">❮</a>
-        <a class="next" onclick="plusSlides(1)">❯</a>
+    <img name="slide" alt="" height = "100px" weight="200px"> 
+    <div>
+      <div>
+        <img src="img1.jpg" alt="" height="100px" width="100px" onClick="selectedSlide(0)">
+      </div>
+      <div>
+        <img src="img2.jpg" alt="" height="100px" width="100px" onClick="selectedSlide(1)">
+      </div>
+      <div>
+        <img src="img3.jpg" alt="" height="100px" width="100px" onClick="selectedSlide(2)">
+      </div>
+      <div>
+        <img src="img4.jpg" alt="" height="100px" width="100px" onClick="selectedSlide(3)">
+      </div>
+    </div>       
+        <a class="previous" onclick="slideShow(-1)">❮</a>
+        <a class="next" onclick="slideShow(1)">❯</a>
         <a class="random" onclick="randomSlide()">Random</a>
         </div>
         

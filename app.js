@@ -1,41 +1,31 @@
-let slideIndex = 1;
-showSlides(slideIndex);
+var x = 0;
+var images = [];
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
+images = ["img1.jpg","img2.jpg","img3.jpg","img4.jpg"]
+
+function slideShow(i){
+	// console.log(image)
+	
+	x += i
+	if (x > images.length - 1){
+		x = 0;
+	}
+	if (x < 0){
+		x = images.length - 1
+	}
+	document.slide.src = images[x]
+
 }
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  console.log(slides)
-//   let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-//   for (i = 0; i < dots.length; i++) {
-//     dots[i].className = dots[i].className.replace(" active", "");
-//   }
-  slides[slideIndex-1].style.display = "block";  
-//   dots[slideIndex-1].className += " active";
-}
-
 function randomSlide(){
-    n = Math.floor(Math.random() * 4) + 1;
-    currentSlide(n);
+	x = Math.floor(Math.random() * images.length);
+	console.log(x)
+	document.slide.src = images[x]
+
 }
 
-function locationSelection(){
-  tmp = document.getElementById("hotelList");
-  console.log(tmp)
+function selectedSlide(current){
+	document.slide.src = images[current]
+	x = current;
 }
 
-function showPassword(){
-  
-}
+
